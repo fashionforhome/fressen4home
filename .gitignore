@@ -1,4 +1,6 @@
-/app/config/local
+/app/config/local/*
+/app/config/staging/*
+/app/config/production/*
 /bootstrap/compiled.php
 /vendor
 /.idea

@@ -1,4 +1,4 @@
-/public/vendor
+/app/config/local/*
 /bootstrap/compiled.php
 /vendor
 /.idea

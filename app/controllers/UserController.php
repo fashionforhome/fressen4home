@@ -63,7 +63,6 @@ class UserController extends BaseController
 			} catch (\LogicException $ex) {
 				$messageBag->add('user_exists', 'Could not register user, seems to be already existing.');
 				Log::error('User tried to register although already having id #' . $user->id . '.');
-				throw $ex;
 			}
 		}
 

@@ -36,7 +36,7 @@ class UserTableSeeder extends DatabaseSeeder
         User::create(
             array(
                 'email' => $this->getFFHEmail($faker->firstName, $faker->lastName),
-                'password' => self::USER_PASSWORD
+                'password' => Hash::make(self::USER_PASSWORD)
             )
         );
     }

@@ -12,9 +12,7 @@
 		<div class="navbar-collapse collapse">
 			@if (Auth::check())
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
+					<li class="active"><a href="{{ URL::route('stores.all') }}">Stores</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#">Logout</a></li>

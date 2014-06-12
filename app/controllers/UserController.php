@@ -1,5 +1,7 @@
 <?php
 
+use \Illuminate\Support\MessageBag;
+
 /**
  * Class UserController
  */
@@ -39,7 +41,68 @@ class UserController extends BaseController
 	 */
 	public function postRegister()
 	{
-		echo "register procedure";
-		return $this->getRegisterForm();
+		$email = Input::get('email');
+		$password = Input::get('password');
+
+		$validator = $this->getUserDataValidator($email, $password, Input::get('password_confirmation'));
+		$messageBag = $validator->getMessageBag();
+
+		if ($validator->passes()) {
+			$user = new User();
+			try {
+				$user->register($email, $password);
+				$successMessageBag = new MessageBag();
+				$successMessageBag->add('success', 'Registration complete!');
+
+				Log::info('Registration successful of email: ' . $email);
+
+				// TODO: Implement login
+
+				return Redirect::route('user.register.form') // TODO: Change to redirect to overview page
+					->with('messages', $successMessageBag);
+			} catch (\LogicException $ex) {
+				$messageBag->add('user_exists', 'Could not register user, seems to be already existing.');
+				Log::error('User tried to register although already having id #' . $user->id . '.');
+				throw $ex;
+			}
+		}
+
+		Log::info('Errors occured during registration of email: ' . $email);
+		return Redirect::route('user.register.form')
+			->withErrors($messageBag)
+			->withInput(Input::all());
+	}
+
+	/**
+	 * Validates user data (email and password) for both login and registration.
+	 *
+	 * @param string $email
+	 * @param string $password
+	 * @param string $passwordConfirmation [optional] In case the user is registering and should confirm his password.
+	 * @return \Illuminate\Validation\Validator
+	 */
+	private function getUserDataValidator($email, $password, $passwordConfirmation = null)
+	{
+		Validator::extend('ffhemail', function($attribute, $value, $parameters)
+		{
+			return (strpos($value, '@fashionforhome') !== false);
+		});
+
+		$data = array(
+			'email' => $email,
+			'password' => $password,
+		);
+
+		$rules = array(
+			'email' => 'required|email|ffhemail|unique:users',
+			'password' => 'required|min:8',
+		);
+
+		if ($passwordConfirmation !== null) {
+			$data['password_confirmation'] = $passwordConfirmation;
+			$rules['password'] .= '|confirmed';
+		}
+
+		return Validator::make($data, $rules);
 	}
 }

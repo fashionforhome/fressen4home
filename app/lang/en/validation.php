@@ -86,6 +86,9 @@ return array(
 		'attribute-name' => array(
 			'rule-name' => 'custom-message',
 		),
+		'email' => array(
+			'ffhemail' => 'Your email address has to be a fashion for home address.',
+		),
 	),
 
 	/*

@@ -28,8 +28,8 @@
 	@include('layout.' . Config::get('app.layout') . '.navigation')
 
 	<!-- error messages / notifications -->
-	@include('layout.' . Config::get('app.layout') . '.messages', array('messages' => Session::get('messages'), 'type' => 'success'))
-	@include('layout.' . Config::get('app.layout') . '.messages', array('messages' => Session::get('errors'), 'type' => 'danger'))
+	@include('layout.' . Config::get('app.layout') . '.messages', ['messages' => Session::get('messages'), 'type' => 'success'])
+	@include('layout.' . Config::get('app.layout') . '.messages', ['messages' => Session::get('errors'), 'type' => 'danger'])
 
 	<!-- content container -->
 	<div class="row">

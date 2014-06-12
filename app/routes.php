@@ -13,17 +13,17 @@
 
 
 // routes for logged in user
-Route::group(array('before' => 'auth'), function() {
+Route::group(['before' => 'auth'], function() {
 
 });
 
 // logged out user only
-Route::group(array('before' => 'guest'), function() {
-	Route::get('/',                     array(                              'uses' => 'UserController@getLoginForm'));
+Route::group(['before' => 'guest'], function() {
+	Route::get('/',                     [                              'uses' => 'UserController@getLoginForm']);
 
-	Route::get('/user/login',           array('as' => 'user.login.form',    'uses' => 'UserController@getLoginForm'));
-	Route::get('/user/register',        array('as' => 'user.register.form', 'uses' => 'UserController@getRegisterForm'));
+	Route::get('/user/login',           ['as' => 'user.login.form',    'uses' => 'UserController@getLoginForm']);
+	Route::get('/user/register',        ['as' => 'user.register.form', 'uses' => 'UserController@getRegisterForm']);
 
-	Route::post('/user/login',          array('as' => 'user.login',         'uses' => 'UserController@postLogin'));
-	Route::post('/user/register',       array('as' => 'user.register',      'uses' => 'UserController@postRegister'));
+	Route::post('/user/login',          ['as' => 'user.login',         'uses' => 'UserController@postLogin']);
+	Route::post('/user/register',       ['as' => 'user.register',      'uses' => 'UserController@postRegister']);
 });

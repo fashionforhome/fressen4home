@@ -2,6 +2,10 @@
 
 return array(
 
+
+	'layout'        => 'default',
+	'project_name'  => 'Fressen 4 Home',
+
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode

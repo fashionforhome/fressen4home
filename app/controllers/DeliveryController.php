@@ -11,7 +11,7 @@ class DeliveryController extends BaseController {
 	 */
 	public function getOverviewOfActive()
 	{
-
+        return View::make('delivery.active', ['activeDeliveries' => Delivery::active()->get()->sortBy('closing_time')]);
 	}
 
 	/**

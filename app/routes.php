@@ -21,6 +21,7 @@ Route::group(['before' => 'auth'], function() {
 
 	Route::post('/delivery/{deliveryId}/order/{dishId}',    ['as' => 'delivery.order.dish',     'uses' => 'DeliveryController@postAddOrder']);
 	Route::get('/delivery/{id}/dishes',                     ['as' => 'delivery.store.dishes',   'uses' => 'DeliveryController@getStoreDishes']);
+    Route::get('/deliveries/active',      ['as' => 'deliveries.active',     'uses' => 'DeliveryController@getOverviewOfActive']);
 });
 
 // logged out user only

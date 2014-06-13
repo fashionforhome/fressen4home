@@ -44,7 +44,7 @@ class UserController extends BaseController
 	public function postLogin()
 	{
 		if (Auth::attempt(['email' => Input::get('email'), 'password' => Input::get('password')], (bool) Input::get('rememberMe'))) {
-			return Redirect::route('stores.all');
+			return Redirect::route('deliveries.active');
 		} else {
 			$errors = new MessageBag(array('Login failed.'));
 			return Redirect::back()

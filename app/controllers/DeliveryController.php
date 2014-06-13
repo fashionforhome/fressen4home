@@ -70,4 +70,19 @@ class DeliveryController extends BaseController {
 			->with('messages', $messages);
 	}
 
+	/**
+	 * show the delivery related order data
+	 */
+	public function getOrderOverview($id)
+	{
+		$delivery = Delivery::find($id);
+
+		// if no delivery with given id loaded
+		if (!$delivery) {
+			return Redirect::back()
+				->with('errors', new MessageBag(['An error has occurred.']));
+		}
+
+		return View::make('delivery.order.overview', ['delivery' => $delivery]);
+	}
 }

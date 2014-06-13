@@ -3,7 +3,22 @@
 class Delivery extends Eloquent
 {
 	protected $table = 'deliveries';
-	protected $appends = ['is_active', 'remaining_time'];
+	protected $appends = ['is_active', 'remaining_time', 'total_price'];
+
+	/**
+	 * returns the total price for the delivery
+	 *
+	 * @return int
+	 */
+	public function getTotalPriceAttribute()
+	{
+		$price = 0;
+		foreach ($this->orders as $order) {
+			$price += $order->dish->price;
+		}
+
+		return $price;
+	}
 
 	/**
 	 * is delivery still active

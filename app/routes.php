@@ -16,6 +16,8 @@
 Route::group(['before' => 'auth'], function() {
 	Route::get('/stores/all',           ['as' => 'stores.all',          'uses' => 'StoreController@getAll']);
 	Route::get('/store/{id}/dishes',    ['as' => 'store.dishes',        'uses' => 'StoreController@getDishes']);
+
+	Route::get('/user/logout',          ['as' => 'user.logout',          'uses' => 'UserController@getLogout']);
 });
 
 // logged out user only

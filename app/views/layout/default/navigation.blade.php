@@ -15,7 +15,7 @@
 					<li class="active"><a href="{{ URL::route('stores.all') }}">Stores</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Logout</a></li>
+					<li><a href="{{ URL::route('user.logout') }}">Logout</a></li>
 				</ul>
 			@else
 				<ul class="nav navbar-nav navbar-right">

@@ -28,12 +28,29 @@ class UserController extends BaseController
 	}
 
 	/**
+	 * logout the current user and redirect to the home page
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function getLogout()
+	{
+		Auth::logout();
+		return Redirect::route('user.login.form');
+	}
+
+	/**
 	 * login user and redirect to logged in landing page
 	 */
 	public function postLogin()
 	{
-		echo 'login procedure';
-		return $this->getLoginForm();
+		if (Auth::attempt(['email' => Input::get('email'), 'password' => Input::get('password')], (bool) Input::get('rememberMe'))) {
+			return Redirect::route('stores.all');
+		} else {
+			$errors = new MessageBag(array('Login failed.'));
+			return Redirect::back()
+				->withInput()
+				->with('errors', $errors);
+		}
 	}
 
 	/**

@@ -12,6 +12,10 @@
 				{{ Form::label('password', 'Password') }}
 				{{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) }}
 			</div>
+			<div class="form-group">
+				{{ Form::checkbox('rememberMe', 'true', Input::old('rememberMe')) }}
+				Remember me!
+			</div>
 			<div class="form-group text-right">
 				{{ Form::submit('Login', ['class' => 'btn btn-success']) }}
 			</div>

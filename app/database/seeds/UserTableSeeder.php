@@ -27,6 +27,12 @@ class UserTableSeeder extends DatabaseSeeder
         for ($i = 0; $i < self::ROW_COUNT; $i++) {
             $this->createNewUser();
         }
+
+	    // explizit login user
+	    User::create([
+			'email'     => 'tester@fashionforhome.de',
+		    'password'  => Hash::make('tester')
+	    ]);
     }
 
     private function createNewUser()

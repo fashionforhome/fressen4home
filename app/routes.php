@@ -14,10 +14,13 @@
 
 // routes for logged in user
 Route::group(['before' => 'auth'], function() {
-	Route::get('/stores/all',           ['as' => 'stores.all',          'uses' => 'StoreController@getAll']);
-	Route::get('/store/{id}/dishes',    ['as' => 'store.dishes',        'uses' => 'StoreController@getDishes']);
+	Route::get('/stores/all',           ['as' => 'stores.all',              'uses' => 'StoreController@getAll']);
+	Route::get('/store/{id}/dishes',    ['as' => 'store.dishes',            'uses' => 'StoreController@getDishes']);
 
-	Route::get('/user/logout',          ['as' => 'user.logout',          'uses' => 'UserController@getLogout']);
+	Route::get('/user/logout',          ['as' => 'user.logout',             'uses' => 'UserController@getLogout']);
+
+	Route::post('/delivery/{deliveryId}/order/{dishId}',    ['as' => 'delivery.order.dish',     'uses' => 'DeliveryController@postAddOrder']);
+	Route::get('/delivery/{id}/dishes',                     ['as' => 'delivery.store.dishes',   'uses' => 'DeliveryController@getStoreDishes']);
 });
 
 // logged out user only

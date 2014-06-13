@@ -3,6 +3,17 @@
 class Delivery extends Eloquent
 {
 	protected $table = 'deliveries';
+	protected $appends = ['is_active'];
+
+	/**
+	 * is delivery still active
+	 *
+	 * @return bool
+	 */
+	public function getIsActiveAttribute()
+	{
+		return new DateTime() < new DateTime($this->closing_time);
+	}
 
 	/**
 	 * Relationship to the model Store

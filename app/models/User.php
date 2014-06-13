@@ -9,6 +9,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 {
 	use UserTrait, RemindableTrait;
 
+	protected $appends = ['name'];
+
 	/**
 	 * Relationship to the model Order
 	 * 
@@ -52,7 +54,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 	 *
 	 * @return string
 	 */
-	public function getName()
+	public function getNameAttribute()
 	{
 		if (empty($this->email)) {
 			return '';

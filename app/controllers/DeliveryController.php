@@ -26,6 +26,40 @@ class DeliveryController extends BaseController {
 			return View::make('delivery.store.dishes', ['delivery' => $delivery]);
 		}
 	}
+	
+	public function getCreateForm()
+	{
+		// create the initial DateTime for the DateTimePicker input field at the delivery create formula
+		$futureDateTime = $this->getDateTimeAfterNow(10);
+		return View::make('delivery.create', ['stores' => Store::all(), 'now' => $futureDateTime->format('Y-m-d H:i')]);
+	}
+	
+	public function postCreate()
+	{
+		$nowDateTime = $this->getDateTimeAfterNow(5);
+		$validator = Validator::make(
+			Input::all(), 
+			array(
+				'store' => 'required|numeric|exists:stores,id',
+				'closing_time' => 'date_format:Y-m-d H:i|after:' . $nowDateTime->format('Y-m-d H:i') 
+			)
+		);
+		
+		if ($validator->passes() === false) {
+			return Redirect::back()->withErrors($validator);
+		}
+
+		$storeId = Input::get('store');
+		$closingTime = Input::get('closing_time');
+		
+		$delivery = new Delivery();
+		$delivery->user()->associate(Auth::user());
+		$delivery->store()->associate(Store::find($storeId));
+		$delivery->closing_time = $closingTime;
+		$delivery->save();
+		
+		return Redirect::route('deliveries.active');
+	}
 
 	/**
 	 * add a dish order to a delivery
@@ -84,5 +118,15 @@ class DeliveryController extends BaseController {
 		}
 
 		return View::make('delivery.order.overview', ['delivery' => $delivery]);
+	}
+	
+	public function getDateTimeAfterNow($minutes = 0)
+	{
+		$nowDateTime = new DateTime();
+		$timeZone = new DateTimeZone('Europe/Berlin');
+		$nowDateTime->setTimezone($timeZone);
+		$minuteInterval = new DateInterval('PT' . $minutes . 'M');
+		$futureDateTime = $nowDateTime->add($minuteInterval);
+		return $futureDateTime;
 	}
 }

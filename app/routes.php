@@ -19,6 +19,8 @@ Route::group(['before' => 'auth'], function() {
 
 	Route::get('/user/logout',          ['as' => 'user.logout',     'uses' => 'UserController@getLogout']);
 
+	Route::get('/delivery/create',							['as' => 'delivery.create.form',	'uses' => 'DeliveryController@getCreateForm']);
+	Route::post('/delivery/create',							['as' => 'delivery.create',     	'uses' => 'DeliveryController@postCreate']);
 	Route::post('/delivery/{deliveryId}/order/{dishId}',    ['as' => 'delivery.order.dish',     'uses' => 'DeliveryController@postAddOrder']);
 	Route::get('/delivery/{id}/dishes',                     ['as' => 'delivery.store.dishes',   'uses' => 'DeliveryController@getStoreDishes']);
 	Route::get('/deliveries/active',                        ['as' => 'deliveries.active',       'uses' => 'DeliveryController@getOverviewOfActive']);
@@ -26,7 +28,6 @@ Route::group(['before' => 'auth'], function() {
 
 	Route::post('/order/{id}/change/paid',          ['as' => 'order.change.paid',  'uses' => 'OrderController@postChangePaid']);
 	Route::delete('/order/{orderId}',               ['as' => 'order.delete',       'uses' => 'OrderController@deleteOrder']);
-
 });
 
 // logged out user only

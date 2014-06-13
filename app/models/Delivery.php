@@ -4,7 +4,8 @@ class Delivery extends Eloquent
 {
 	protected $table = 'deliveries';
 	protected $appends = ['is_active', 'remaining_time', 'total_price'];
-
+	protected $fillable = array('store_id', 'closing_time', 'user_id');
+	
 	/**
 	 * returns the total price for the delivery
 	 *

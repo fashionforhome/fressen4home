@@ -13,7 +13,8 @@
     @endforeach
 </ul>
 
-<input type="submit" class="col-md-6 col-md-offset-3 btn btn-sm btn-success" value="create">
+<a href="{{URL::route('delivery.create.form')}}" class="col-md-6 col-md-offset-3 btn btn-sm btn-success">create</a>
+
 @stop
 
 

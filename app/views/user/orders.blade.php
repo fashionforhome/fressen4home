@@ -1,42 +1,36 @@
 @extends('layout.' . Config::get('app.layout') . '.layout')
 
 @section('content')
-<h1 class="page-header">My Orders</h1>
 
-<ul class="nav nav-pills nav-justified">
-    <li class="active"><a href="#">Open</a></li>
-    <li><a href="#">Not Paid</a></li>
-    <li><a href="#">By Store</a></li>
-    <li><a href="#">All</a></li>
-</ul>
+	<div class="col-md-12">
+		<h3 class="page-header">My Orders</h3>
+	</div>
 
-<div class="table-responsive">
-    <table class="table table-striped table-hover">
-        <tr>
-            <th>Date</th>
-            <th>Store</th>
-            <th>#</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th></th>
-        </tr>
-        @foreach ($orders as $order)
-        <tr>
-            <td>{{{ $order->created_at }}}</td>
-            <td>{{{ $order->delivery->store->name }}}</td>
-            <td>{{{ $order->dish_id }}}</td>
-            <td>{{{ $order->dish->name }}}</td>
-            <td>{{{ Numbers::money($order->dish->price, 2) }}}</td>
-            <td>
-                @if ($order->paid)
-                <span class="label label-success">paid</span>
-                @else
-                <span class="label label-danger">not paid</span>
-                @endif
-            </td>
-        </tr>
-        @endforeach
-    </table>
-</div>
+
+	<div class="col-md-12">
+
+		<ul class="nav nav-tabs">
+		    <li class="active"><a href="#open" data-toggle="tab">Open</a></li>
+		    <li><a href="#notpaid" data-toggle="tab">Not Paid</a></li>
+		    <li><a href="#bystore" data-toggle="tab">By Store</a></li>
+		    <li><a href="#all" data-toggle="tab">All</a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div class="tab-pane active" id="open">
+				@include('user.orders.table', ['orders' => $orderOpened])
+			</div>
+			<div class="tab-pane" id="notpaid">
+				@include('user.orders.table', ['orders' => $orderNotPaid])
+			</div>
+			<div class="tab-pane" id="bystore">
+				@include('user.orders.table', ['orders' => $orderByStore])
+			</div>
+			<div class="tab-pane" id="all">
+				@include('user.orders.table', ['orders' => $orderAll])
+			</div>
+		</div>
+
+	</div>
 
 @stop

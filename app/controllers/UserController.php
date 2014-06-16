@@ -55,7 +55,12 @@ class UserController extends BaseController
      */
     public function getUserOrders()
     {
-        return View::make('user.orders', ['orders' => Auth::user()->orders]);
+        return View::make('user.orders', [
+	        'orderOpened'   => Auth::user()->orders,
+	        'orderNotPaid'  => Auth::user()->orders()->notPaid()->get(),
+	        'orderByStore'  => Auth::user()->orders,
+	        'orderAll'      => Auth::user()->orders
+        ]);
     }
 
 	/**

@@ -10,7 +10,7 @@
 					<div class="text-right pull-right">
 
 						<span class="label label-info">{{ $delivery->user->name }}</span>
-						<span class="label label-primary">{{ $delivery->closing_time }}</span>
+						<span class="label label-primary">remaining {{ $delivery->remaining_time }}</span>
 
 						@if ($delivery->is_active)
 							<span class="label label-success">active</span>

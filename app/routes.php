@@ -27,7 +27,7 @@ Route::group(['before' => 'auth'], function() {
 	Route::get('/delivery/{id}',                            ['as' => 'delivery.order.overview', 'uses' => 'DeliveryController@getOrderOverview']);
 
 	Route::post('/order/{id}/change/paid',          ['as' => 'order.change.paid',  'uses' => 'OrderController@postChangePaid']);
-	Route::delete('/order/{orderId}',               ['as' => 'order.delete',       'uses' => 'OrderController@deleteOrder']);
+	Route::post('/order/{orderId}/delete',          ['as' => 'order.delete',       'uses' => 'OrderController@postDelete']);
 });
 
 // logged out user only

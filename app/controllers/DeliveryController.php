@@ -26,14 +26,24 @@ class DeliveryController extends BaseController {
 			return View::make('delivery.store.dishes', ['delivery' => $delivery]);
 		}
 	}
-	
+
+	/**
+	 * get the create form
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function getCreateForm()
 	{
 		// create the initial DateTime for the DateTimePicker input field at the delivery create formula
 		$futureDateTime = $this->getDateTimeAfterNow(10);
 		return View::make('delivery.create', ['stores' => Store::all(), 'now' => $futureDateTime->format('Y-m-d H:i')]);
 	}
-	
+
+	/**
+	 * create a delivery
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function postCreate()
 	{
 		$nowDateTime = $this->getDateTimeAfterNow(5);

@@ -10,7 +10,7 @@ class OrderController extends BaseController
 	 * @param integer $orderId
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function deleteOrder($orderId)
+	public function postDelete($orderId)
 	{
 		$order = Order::find($orderId);
 

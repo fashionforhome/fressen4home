@@ -5,13 +5,15 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 
-			<ul class="list-group">
+			<div class="list-group">
 
 				@foreach ($stores as $store)
-					<li class="list-group-item"><a href="{{ URL::route('store.dishes', ['id' => $store->id]) }}">{{ $store->name }}</a></li>
+					<a href="{{ URL::route('store.dishes', ['id' => $store->id]) }}" class="list-group-item">
+						<h4 class="list-group-item-heading">{{ $store->name }}</h4>
+					</a>
 				@endforeach
 
-			</ul>
+			</div>
 
 		</div>
 	</div>

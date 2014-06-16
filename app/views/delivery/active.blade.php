@@ -9,15 +9,27 @@
 @stop
 
 @section('content')
-	<h4>Open deliveries:</h4>
 
-	<ul class="col-md-6 col-md-offset-3 list-group">
-	    @foreach ($activeDeliveries as $delivery)
-	        @include('delivery.active.item', array('delivery' => $delivery))
-	    @endforeach
-	</ul>
+	<div class="col-md-12">
 
-	@include('delivery.create', ['now' => $now, 'stores' => $stores])
+		<h3 class="page-header">
+			Open deliveries
+			<a data-toggle="modal" data-target="#createForm" class="btn btn-success">create</a>
+		</h3>
+	</div>
+
+	<div class="col-md-12">
+
+		<div class="list-group">
+			@foreach ($activeDeliveries as $delivery)
+				@include('delivery.active.item', array('delivery' => $delivery))
+			@endforeach
+		</div>
+
+		@include('delivery.create', ['now' => $now, 'stores' => $stores])
+
+	</div>
+
 @stop
 
 

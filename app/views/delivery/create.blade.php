@@ -1,5 +1,3 @@
-<a data-toggle="modal" data-target="#createForm" class="col-md-6 col-md-offset-3 btn btn-sm btn-success">create</a>
-
 <div class="modal fade" id="createForm">
 	<div class="modal-dialog">
 

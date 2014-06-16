@@ -8,14 +8,14 @@
 				<h3 class="panel-title">
 					{{ $delivery->store->name }}
 				</h3>
-                <div class="text-left">
+				<div class="text-left" style="margin-top:5px">
                     <span class="label label-info">{{ $delivery->user->name }}</span>
                     <span class="label label-primary">{{ $delivery->closing_time }}</span>
 
                     @if ($delivery->is_active)
-                    <span class="label label-success">active</span>
+                        <span class="label label-success">active</span>
                     @else
-                    <span class="label label-danger">closed</span>
+                        <span class="label label-danger">closed</span>
                     @endif
                 </div>
 			</div>

@@ -29,6 +29,13 @@
 
 			@if (isset($navigation['right']) && count($navigation['right']) > 0)
 				<ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span><b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ URL::route('user.deliveries') }}">My Deliveries</a></li>
+                            <li><a href="{{ URL::route('user.orders') }}">My Orders</a></li>
+                        </ul>
+                    </li>
 					@foreach ($navigation['right'] as $routeName => $routeData)
 						<li @if (Route::currentRouteName() === $routeName || isset($routeData['also']) && in_array(Route::currentRouteName(), $routeData['also'])) class="active" @endif>
 							<a href="{{ URL::route($routeName) }}">{{ $routeData['label'] }}</a>

@@ -38,6 +38,26 @@ class UserController extends BaseController
 		return Redirect::route('user.login.form');
 	}
 
+    /**
+     * show overview of users deliveries
+     *
+     * @return \Illuminate\View\View
+     */
+    public function getUserDeliveries()
+    {
+        return View::make('user.deliveries', ['deliveries' => Auth::user()->deliveries]);
+    }
+
+    /**
+     * show overview of users orders
+     *
+     * @return \Illuminate\View\View
+     */
+    public function getUserOrders()
+    {
+        return View::make('user.orders', ['orders' => Auth::user()->orders]);
+    }
+
 	/**
 	 * login user and redirect to logged in landing page
 	 */

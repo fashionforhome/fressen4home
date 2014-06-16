@@ -14,6 +14,6 @@ class Numbers
 	{
 		$rounded = $number * pow(10, -$decimalShift);
 
-		return number_format ($rounded, 2, ',', '.') . '€';
+		return number_format ($rounded, 2, ',', '.') . ' €';
 	}
 }

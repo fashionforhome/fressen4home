@@ -44,7 +44,8 @@ class Delivery extends Eloquent
 	}
 
     /**
-     * Get remaining time until delivery is closed
+     * Get remaining time until delivery is closed.
+     * Returns '0', if delivery is already closed.
      *
      * @return string
      */

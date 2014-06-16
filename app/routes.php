@@ -16,6 +16,8 @@ Route::group(['before' => 'auth'], function() {
 
 	// user related
 	Route::get('/user/logout',                              ['as' => 'user.logout',             'uses' => 'UserController@getLogout']);
+    Route::get('/user/deliveries',                          ['as' => 'user.deliveries',         'uses' => 'UserController@getUserDeliveries']);
+    Route::get('/user/orders',                              ['as' => 'user.orders',             'uses' => 'UserController@getUserOrders']);
 
 	// store overview
 	Route::get('/store/all',                                ['as' => 'store.all',               'uses' => 'StoreController@getAll']);

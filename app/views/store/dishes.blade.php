@@ -17,24 +17,22 @@
 				{{ $store->postcode }} {{ $store->city }}
 			</div>
 
-			<table class="table table-striped">
-				<tr>
-					<th class="text-right" style="width: 50px">#</th>
-					<th>Name</th>
-					<th class="text-right" style="width: 100px">Price</th>
-					<th style="width: 100px"></th>
-				</tr>
-				@foreach ($store->dishes as $dish)
+			<div class="table-responsive">
+				<table class="table table-striped">
 					<tr>
-						<td class="text-right">{{ $dish->store_dish_id }}</td>
-						<td>{{ $dish->name }}</td>
-						<td class="text-right">{{ Numbers::money($dish->price, 2) }}</td>
-						<td class="text-center">
-							<input type="submit" class="btn btn-sm btn-success" value="order">
-						</td>
+						<th class="text-right" style="width: 50px">#</th>
+						<th>Name</th>
+						<th class="text-right" style="width: 100px">Price</th>
 					</tr>
-				@endforeach
-			</table>
+					@foreach ($store->dishes as $dish)
+						<tr>
+							<td class="text-right">{{ $dish->store_dish_id }}</td>
+							<td>{{ $dish->name }}</td>
+							<td class="text-right">{{ Numbers::money($dish->price, 2) }}</td>
+						</tr>
+					@endforeach
+				</table>
+			</div>
 
 		</div>
 	</div>

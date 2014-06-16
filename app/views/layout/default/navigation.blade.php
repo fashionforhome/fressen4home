@@ -10,20 +10,33 @@
 			<a class="navbar-brand" href="#">{{ Config::get('app.project_name') }}</a>
 		</div>
 		<div class="navbar-collapse collapse">
+
 			@if (Auth::check())
-				<ul class="nav navbar-nav">
-                    <li class="active"><a href="{{ URL::route('deliveries.active') }}">Active Deliveries</a></li>
-					<li class="active"><a href="{{ URL::route('stores.all') }}">Stores</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="{{ URL::route('user.logout') }}">Logout</a></li>
-				</ul>
+				<?php $navigation = Config::get('navigation.user'); ?>
 			@else
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="{{ URL::route('user.login.form') }}">Login</a></li>
-					<li><a href="{{ URL::route('user.register.form') }}">Register</a></li>
+				<?php $navigation = Config::get('navigation.guest'); ?>
+			@endif
+
+			@if (isset($navigation['left']) && count($navigation['left']) > 0)
+				<ul class="nav navbar-nav">
+					@foreach ($navigation['left'] as $routeName => $routeData)
+						<li @if (Route::currentRouteName() === $routeName || isset($routeData['also']) && in_array(Route::currentRouteName(), $routeData['also'])) class="active" @endif>
+							<a href="{{ URL::route($routeName) }}">{{ $routeData['label'] }}</a>
+						</li>
+					@endforeach
 				</ul>
 			@endif
+
+			@if (isset($navigation['right']) && count($navigation['right']) > 0)
+				<ul class="nav navbar-nav navbar-right">
+					@foreach ($navigation['right'] as $routeName => $label)
+						<li @if (Route::currentRouteName() === $routeName || isset($routeData['also']) && in_array(Route::currentRouteName(), $routeData['also'])) class="active" @endif>
+							<a href="{{ URL::route($routeName) }}">{{ $routeData['label'] }}</a>
+						</li>
+					@endforeach
+				</ul>
+			@endif
+
 		</div><!--/.nav-collapse -->
 	</div><!--/.container-fluid -->
 </div>

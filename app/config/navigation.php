@@ -4,12 +4,12 @@
 return [
 	'user' => [
 		'left' => [
-			'deliveries.active' => [
+			'delivery.active'   => [
 				'label' => 'Active Deliveries'
 			],
-			'stores.all'        => [
+			'store.all'         => [
 				'label' => 'Stores',
-				'also' => ['store.dishes']
+				'also'  => ['store.dish']
 			]
 		],
 		'right' => [

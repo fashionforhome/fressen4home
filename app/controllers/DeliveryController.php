@@ -63,7 +63,7 @@ class DeliveryController extends BaseController {
 		$delivery->closing_time = $closingTime;
 		$delivery->save();
 
-		return Redirect::route('deliveries.active');
+		return Redirect::route('delivery.active');
 	}
 
 	/**
@@ -112,7 +112,7 @@ class DeliveryController extends BaseController {
 	/**
 	 * show the delivery related order data
 	 */
-	public function getOrderOverview($id)
+	public function getOverview($id)
 	{
 		$delivery = Delivery::find($id);
 
@@ -122,7 +122,7 @@ class DeliveryController extends BaseController {
 				->with('errors', new MessageBag(['An error has occurred.']));
 		}
 
-		return View::make('delivery.order.overview', ['delivery' => $delivery]);
+		return View::make('delivery.overview', ['delivery' => $delivery]);
 	}
 
 	/**

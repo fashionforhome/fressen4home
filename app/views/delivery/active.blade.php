@@ -11,7 +11,6 @@
 @section('content')
 
 	<div class="col-md-12">
-
 		<h3 class="page-header">
 			Open deliveries
 			<a data-toggle="modal" data-target="#createForm" class="btn btn-success">create</a>

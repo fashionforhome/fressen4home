@@ -45,7 +45,7 @@ class UserController extends BaseController
      */
     public function getUserDeliveries()
     {
-        return View::make('user.deliveries', ['deliveries' => Auth::user()->deliveries]);
+        return View::make('user.deliveries', ['deliveries' => Auth::user()->deliveries->sortByDesc('created_at')]);
     }
 
     /**

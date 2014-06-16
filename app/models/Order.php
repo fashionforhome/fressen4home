@@ -53,4 +53,16 @@ class Order extends Eloquent
 	{
 		return $this->delivery->user == $user;
 	}
+
+    /**
+     * Query scope for unpaid orders
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopeUnpaid($query)
+    {
+        return $query->where('paid', '=', 0);
+    }
+
 }

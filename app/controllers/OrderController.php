@@ -50,12 +50,7 @@ class OrderController extends BaseController
 		$order->paid = (bool) !$order->paid;
 		$order->save();
 
-		// messages
-		$messages = new MessageBag();
-		$messages->add('success', 'Successfully changed paid status of the order!');
-
-		return Redirect::back()
-			->with('messages', $messages);
+		return Redirect::back();
 	}
 
 }

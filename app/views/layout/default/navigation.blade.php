@@ -29,7 +29,7 @@
 
 			@if (isset($navigation['right']) && count($navigation['right']) > 0)
 				<ul class="nav navbar-nav navbar-right">
-					@foreach ($navigation['right'] as $routeName => $label)
+					@foreach ($navigation['right'] as $routeName => $routeData)
 						<li @if (Route::currentRouteName() === $routeName || isset($routeData['also']) && in_array(Route::currentRouteName(), $routeData['also'])) class="active" @endif>
 							<a href="{{ URL::route($routeName) }}">{{ $routeData['label'] }}</a>
 						</li>

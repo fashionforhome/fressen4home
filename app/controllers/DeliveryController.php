@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use \Illuminate\Support\MessageBag;
 
 class DeliveryController extends BaseController {
@@ -11,7 +12,13 @@ class DeliveryController extends BaseController {
 	 */
 	public function getOverviewOfActive()
 	{
-        return View::make('delivery.active', ['activeDeliveries' => Delivery::active()->get()->sortBy('closing_time')]);
+        return View::make('delivery.active', [
+	        'activeDeliveries' => Delivery::active()->get()->sortBy('closing_time'),
+
+	        // create form data
+	        'now' => $this->getDateTimeAfterNow(10)->format('Y-m-d H:i:s'),
+			'stores' => Store::all()
+        ]);
 	}
 
 	/**
@@ -28,18 +35,6 @@ class DeliveryController extends BaseController {
 	}
 
 	/**
-	 * get the create form
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getCreateForm()
-	{
-		// create the initial DateTime for the DateTimePicker input field at the delivery create formula
-		$futureDateTime = $this->getDateTimeAfterNow(10);
-		return View::make('delivery.create', ['stores' => Store::all(), 'now' => $futureDateTime->format('Y-m-d H:i')]);
-	}
-
-	/**
 	 * create a delivery
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
@@ -51,7 +46,7 @@ class DeliveryController extends BaseController {
 			Input::all(), 
 			array(
 				'store' => 'required|numeric|exists:stores,id',
-				'closing_time' => 'date_format:Y-m-d H:i|after:' . $nowDateTime->format('Y-m-d H:i') 
+				'closing_time' => 'date_format:Y-m-d H:i:s|after:' . $nowDateTime->format('Y-m-d H:i:s')
 			)
 		);
 		
@@ -61,13 +56,13 @@ class DeliveryController extends BaseController {
 
 		$storeId = Input::get('store');
 		$closingTime = Input::get('closing_time');
-		
+
 		$delivery = new Delivery();
 		$delivery->user()->associate(Auth::user());
 		$delivery->store()->associate(Store::find($storeId));
 		$delivery->closing_time = $closingTime;
 		$delivery->save();
-		
+
 		return Redirect::route('deliveries.active');
 	}
 
@@ -136,7 +131,7 @@ class DeliveryController extends BaseController {
 	 * @param int $minutes
 	 * @return mixed
 	 */
-	public function getDateTimeAfterNow($minutes = 0)
+	private function getDateTimeAfterNow($minutes = 0)
 	{
 		return Carbon::now()->addMinutes($minutes);
 	}

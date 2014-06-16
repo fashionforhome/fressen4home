@@ -1,11 +1,23 @@
 <?php
 
+use Carbon\Carbon;
+
 class Delivery extends Eloquent
 {
 	protected $table = 'deliveries';
 	protected $appends = ['is_active', 'remaining_time', 'total_price'];
 	protected $fillable = array('store_id', 'closing_time', 'user_id');
-	
+
+	/**
+	 * add date mutators
+	 *
+	 * @return array
+	 */
+	public function getDates()
+	{
+		return array('closing_time');
+	}
+
 	/**
 	 * returns the total price for the delivery
 	 *
@@ -28,7 +40,7 @@ class Delivery extends Eloquent
 	 */
 	public function getIsActiveAttribute()
 	{
-		return new DateTime() < new DateTime($this->closing_time);
+		return Carbon::now() < $this->closing_time;
 	}
 
     /**
@@ -38,15 +50,17 @@ class Delivery extends Eloquent
      */
     public function getRemainingTimeAttribute()
     {
-        $pattern = '%i min';
+	    $diffInHours = Carbon::now()->diffInHours($this->closing_time, false);
+	    $diffInMinutes = Carbon::now()->diffInMinutes($this->closing_time, false);
 
-        $now = new DateTime();
-        $diff = $now->diff(new DateTime($this->closing_time));
+	    $diffInHours = $diffInHours < 0 ? 0 : $diffInHours;
+	    $diffInMinutes = $diffInMinutes < 0 ? 0 : $diffInMinutes % 60;
 
-        if ($diff->h > 0) {
-            $pattern = '%h h ' . $pattern;
+        if ($diffInHours > 0) {
+            return sprintf('%d h %d min', $diffInHours, $diffInMinutes);
+        } else {
+            return sprintf('%d min', $diffInMinutes);
         }
-        return $diff->format($pattern);
     }
 
 	/**
@@ -87,7 +101,7 @@ class Delivery extends Eloquent
      */
     public function scopeActive($query)
     {
-        return $query->where('closing_time', '>', date('Y-m-d H:i:s'));
+        return $query->where('closing_time', '>', Carbon::now());
     }
 
 }

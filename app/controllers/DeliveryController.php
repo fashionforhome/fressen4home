@@ -129,14 +129,15 @@ class DeliveryController extends BaseController {
 
 		return View::make('delivery.order.overview', ['delivery' => $delivery]);
 	}
-	
+
+	/**
+	 * returns a carbon time in $minutes
+	 *
+	 * @param int $minutes
+	 * @return mixed
+	 */
 	public function getDateTimeAfterNow($minutes = 0)
 	{
-		$nowDateTime = new DateTime();
-		$timeZone = new DateTimeZone('Europe/Berlin');
-		$nowDateTime->setTimezone($timeZone);
-		$minuteInterval = new DateInterval('PT' . $minutes . 'M');
-		$futureDateTime = $nowDateTime->add($minuteInterval);
-		return $futureDateTime;
+		return Carbon::now()->addMinutes($minutes);
 	}
 }

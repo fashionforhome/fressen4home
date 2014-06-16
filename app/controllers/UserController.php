@@ -57,7 +57,7 @@ class UserController extends BaseController
     {
         return View::make('user.orders', [
 	        'orderOpened'   => Auth::user()->orders,
-	        'orderNotPaid'  => Auth::user()->orders()->notPaid()->get(),
+	        'orderNotPaid'  => Auth::user()->orders()->unpaid()->get(),
 	        'orderByStore'  => Auth::user()->orders,
 	        'orderAll'      => Auth::user()->orders
         ]);

@@ -62,7 +62,7 @@ class Order extends Eloquent
      */
     public function scopeUnpaid($query)
     {
-        return $query->where('paid', '=', 0);
+        return $query->wherePaid(false);
     }
 
 }

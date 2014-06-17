@@ -56,10 +56,14 @@ class UserController extends BaseController
     public function getUserOrders()
     {
         return View::make('user.orders', [
-	        'orderOpened'   => Auth::user()->orders,
-	        'orderNotPaid'  => Auth::user()->orders()->unpaid()->get(),
-	        'orderByStore'  => Auth::user()->orders,
-	        'orderAll'      => Auth::user()->orders
+            'orderOpened' => Auth::user()->orders()->with('delivery')->get()->filter(function($order) {
+                    return $order->delivery->is_active;
+                })->sortByDesc('created_at'),
+	        'orderNotPaid' => Auth::user()->orders()->unpaid()->get()->sortByDesc('created_at'),
+            'orderByStore' => Auth::user()->orders()->with('delivery.store')->get()->sortBy(function($order) {
+                    return $order->delivery->store->name;
+                })->sortByDesc('created_at'),
+	        'orderAll' => Auth::user()->orders->sortByDesc('created_at')
         ]);
     }
 

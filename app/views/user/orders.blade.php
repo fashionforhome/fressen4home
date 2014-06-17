@@ -24,7 +24,7 @@
 				@include('user.orders.table', ['orders' => $orderNotPaid])
 			</div>
 			<div class="tab-pane" id="bystore">
-				@include('user.orders.table', ['orders' => $orderByStore])
+				@include('user.orders.bystore', ['orders' => $orderByStore])
 			</div>
 			<div class="tab-pane" id="all">
 				@include('user.orders.table', ['orders' => $orderAll])

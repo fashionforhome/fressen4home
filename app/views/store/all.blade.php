@@ -3,6 +3,12 @@
 @section('content')
 
 	<div class="col-md-12">
+		<h3 class="page-header">
+			Store overview
+		</h3>
+	</div>
+
+	<div class="col-md-12">
 		<div class="panel panel-default">
 
 			<div class="list-group">

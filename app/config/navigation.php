@@ -9,7 +9,7 @@ return [
 			],
 			'store.all'         => [
 				'label' => 'Stores',
-				'also'  => ['store.dish']
+				'also'  => ['store.dishes']
 			]
 		],
 		'right' => [

@@ -1,7 +1,7 @@
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
         <div class="navbar-header pull-left">
-            <button type="button" class="pull-left btn btn-default navbar-btn visible-xs visible-sm">
+            <button type="button" class="pull-left btn btn-default navbar-btn visible-xs visible-sm" style="margin-left: 15px;">
                 <a href="{{{ URL::previous() }}}"><span class="glyphicon glyphicon-arrow-left"></span></a>
             </button>
             <a class="navbar-brand" href="#">{{ Config::get('app.project_name') }}</a>

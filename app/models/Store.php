@@ -2,6 +2,9 @@
 
 class Store extends Eloquent
 {
+
+    protected $fillable = array('name', 'phone_number', 'street', 'postcode', 'city');
+
 	/**
 	 * internal cache for performance methods
 	 *

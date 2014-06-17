@@ -2,6 +2,9 @@
 
 class Dish extends Eloquent
 {
+
+    protected $fillable = array('store_dish_id', 'name', 'price');
+
 	protected $table = 'dishes';
 
 	/**

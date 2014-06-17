@@ -153,7 +153,10 @@ class DeliveryController extends BaseController {
 		// if not allowed
 		if (!$delivery->allowedToDelete(Auth::user())) {
 			return Redirect::back()
-				->with('errors', new MessageBag(['You are not allowed to delete the delivery.']));
+				->with('errors', new MessageBag([
+					'You are not allowed to delete the delivery.',
+					'It\'s got to be your delivery and having no orders'
+				]));
 		}
 
 		$delivery->delete();
@@ -182,7 +185,10 @@ class DeliveryController extends BaseController {
 		// if not allowed
 		if (!$delivery->allowedToClose(Auth::user())) {
 			return Redirect::back()
-				->with('errors', new MessageBag(['You are not allowed to close the delivery.']));
+				->with('errors', new MessageBag([
+					'You are not allowed to close the delivery.',
+					'It\'s got to be your delivery and having no orders'
+				]));
 		}
 
 		$delivery->close();

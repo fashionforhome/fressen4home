@@ -67,4 +67,30 @@ class Order extends Eloquent
         return $query->wherePaid(false);
     }
 
+	/**
+	 * @param $query
+	 * @return mixed
+	 */
+	public function scopeLastWeek($query)
+	{
+		return $query->where('created_at', '>', Carbon::now()->subWeek());
+	}
+
+	/**
+	 * @param $query
+	 * @return mixed
+	 */
+	public function scopeLastMonth($query)
+	{
+		return $query->where('created_at', '>', Carbon::now()->subMonth());
+	}
+
+	/**
+	 * @param $query
+	 * @return mixed
+	 */
+	public function scopeLastYear($query)
+	{
+		return $query->where('created_at', '>', Carbon::now()->subYear());
+	}
 }

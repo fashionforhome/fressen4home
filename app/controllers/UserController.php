@@ -161,4 +161,30 @@ class UserController extends BaseController
 
 		return Validator::make($data, $rules);
 	}
+
+	/**
+	 * user statistics
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function getStatistics()
+	{
+		$user = Auth::user();
+
+		// favorite stores
+		$allStores = Store::all();
+		$favoriteStoresBySpending = $allStores->sortByDesc(function($store) use ($user) {
+			return $store->spendByUser($user);
+		})->take(5);
+
+		$favoriteStoresByOrderCount = $allStores->sortByDesc(function($store) use ($user) {
+			return $store->ordersByUser($user);
+		})->take(5);
+
+
+		return View::make('user.statistics', [
+			'favoriteStoresBySpending' => $favoriteStoresBySpending,
+			'favoriteStoresByOrderCount' => $favoriteStoresByOrderCount,
+		]);
+	}
 }

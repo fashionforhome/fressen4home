@@ -9,3 +9,13 @@ html {
 .my-deliveries-pagination .pagination {
 	margin-top: 0px;
 }
+
+.badge-primary {
+	background-color: #428bca;
+}
+.badge-danger {
+	background-color: #d9534f;
+}
+.badge-success {
+	background-color: #5cb85c;
+}

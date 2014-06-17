@@ -9,7 +9,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 {
 	use UserTrait, RemindableTrait;
 
-	protected $appends = ['name'];
+	protected $appends = ['name', 'spend_last_week', 'spend_last_month', 'spend_last_year'];
 
 	/**
 	 * Relationship to the model Order
@@ -61,5 +61,44 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 		}
 		$parts = explode('@', $this->email);
 		return array_shift($parts);
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getSpendLastWeekAttribute()
+	{
+		$totalPrice = 0;
+		foreach ($this->orders()->lastWeek()->get() as $order) {
+			$totalPrice += $order->dish->price;
+		}
+
+		return $totalPrice;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getSpendLastMonthAttribute()
+	{
+		$totalPrice = 0;
+		foreach ($this->orders()->lastMonth()->get() as $order) {
+			$totalPrice += $order->dish->price;
+		}
+
+		return $totalPrice;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getSpendLastYearAttribute()
+	{
+		$totalPrice = 0;
+		foreach ($this->orders()->lastYear()->get() as $order) {
+			$totalPrice += $order->dish->price;
+		}
+
+		return $totalPrice;
 	}
 }

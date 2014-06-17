@@ -42,7 +42,7 @@ class Order extends Eloquent
 	 */
 	public function allowedToDelete(User $user)
 	{
-		return $this->user == $user || $this->delivery->user == $user;
+		return ($this->user == $user || $this->delivery->user == $user) && $this->delivery->is_active;
 	}
 
 	/**

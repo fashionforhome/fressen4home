@@ -8,6 +8,13 @@ use \Illuminate\Support\MessageBag;
 class UserController extends BaseController
 {
 	/**
+	 * deliveries for pagination
+	 *
+	 * @var int
+	 */
+	private $deliviesPerPage = 8;
+
+	/**
 	 * show login form
 	 *
 	 * @return mixed
@@ -45,7 +52,11 @@ class UserController extends BaseController
      */
     public function getUserDeliveries()
     {
-        return View::make('user.deliveries', ['deliveries' => Auth::user()->deliveries->sortByDesc('created_at')]);
+	    $deliveries = Auth::user()->deliveries()
+		    ->orderBy('created_at', 'desc')
+		    ->paginate($this->deliviesPerPage);
+
+        return View::make('user.deliveries', ['deliveries' => $deliveries]);
     }
 
     /**

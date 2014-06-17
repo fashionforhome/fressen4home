@@ -5,3 +5,7 @@ html {
 .page-header {
 	margin-top: 0px !important;
 }
+
+.my-deliveries-pagination .pagination {
+	margin-top: 0px;
+}

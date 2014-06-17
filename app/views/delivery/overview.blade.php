@@ -21,6 +21,14 @@
 			</div>
 
 			<div class="panel-body">
+				<div class="pull-right text-right">
+					{{ Form::open(['route' => ['delivery.close', $delivery->id]]) }}
+						<button type="submit" class="btn btn-sm btn-warning" style="margin-bottom: 5px;"><span class="glyphicon glyphicon-off"></span> Close</button><br>
+					{{ Form::close() }}
+					{{ Form::open(['route' => ['delivery.delete', $delivery->id]]) }}
+						<button type="submit" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+					{{ Form::close() }}
+				</div>
 				Tel: {{ $delivery->store->phone_number }}<br>
 				{{ $delivery->store->street }}<br>
 				{{ $delivery->store->postcode }} {{ $delivery->store->city }}

@@ -135,4 +135,62 @@ class DeliveryController extends BaseController {
 	{
 		return Carbon::now()->addMinutes($minutes);
 	}
+
+	/**
+	 * delete the delivery if is possible
+	 *
+	 * @param $deliveryId
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postDelete($deliveryId)
+	{
+		// if cant load
+		if (!($delivery = Delivery::find($deliveryId))) {
+			return Redirect::back()
+				->with('errors', new MessageBag(['An error has occurred.']));
+		}
+
+		// if not allowed
+		if (!$delivery->allowedToDelete(Auth::user())) {
+			return Redirect::back()
+				->with('errors', new MessageBag(['You are not allowed to delete the delivery.']));
+		}
+
+		$delivery->delete();
+
+		$messages = new MessageBag();
+		$messages->add('success', 'Successfully deleted your delivery!');
+
+		return Redirect::route('user.deliveries')
+			->with('messages', $messages);
+	}
+
+	/**
+	 * close a delivery
+	 *
+	 * @param $deliveryId
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postClose($deliveryId)
+	{
+		// if cant load
+		if (!($delivery = Delivery::find($deliveryId))) {
+			return Redirect::back()
+				->with('errors', new MessageBag(['An error has occurred.']));
+		}
+
+		// if not allowed
+		if (!$delivery->allowedToClose(Auth::user())) {
+			return Redirect::back()
+				->with('errors', new MessageBag(['You are not allowed to close the delivery.']));
+		}
+
+		$delivery->close();
+
+		$messages = new MessageBag();
+		$messages->add('success', 'Successfully closed your delivery!');
+
+		return Redirect::back()
+			->with('messages', $messages);
+	}
 }

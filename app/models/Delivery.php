@@ -105,4 +105,51 @@ class Delivery extends Eloquent
         return $query->where('closing_time', '>', Carbon::now());
     }
 
+	/**
+	 * determine whether the user is allowed to delete the delivery
+	 *
+	 * @param User $user
+	 * @return bool
+	 */
+	public function allowedToDelete(User $user)
+	{
+		return $this->user == $user && $this->orders->count() == 0;
+	}
+
+	/**
+	 * is user allowed to close the delivery
+	 *
+	 * @param User $user
+	 * @return bool
+	 */
+	public function allowedToClose(User $user)
+	{
+		return $this->user == $user && $this->orders->count() == 0;
+	}
+
+	/**
+	 * close the delivery
+	 *
+	 * @return $this
+	 */
+	public function close()
+	{
+		$this->closing_time = Carbon::now();
+		$this->save();
+
+		return $this;
+	}
+
+	/**
+	 * on delete
+	 *
+	 * @return bool|null|void
+	 */
+	public function delete()
+	{
+		// delete all orders
+		$this->orders()->delete();
+
+		return parent::delete();
+	}
 }

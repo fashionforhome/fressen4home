@@ -30,6 +30,8 @@ Route::group(['before' => 'auth'], function() {
 
 	Route::post('/delivery/create',							['as' => 'delivery.create',     	'uses' => 'DeliveryController@postCreate']);
 	Route::post('/delivery/{deliveryId}/order/{dishId}',    ['as' => 'delivery.order.dish',     'uses' => 'DeliveryController@postAddOrder']);
+	Route::post('/delivery/{deliveryId}/delete',			['as' => 'delivery.delete',     	'uses' => 'DeliveryController@postDelete']);
+	Route::post('/delivery/{deliveryId}/close',			    ['as' => 'delivery.close',     	    'uses' => 'DeliveryController@postClose']);
 
 	// orders
 	Route::post('/order/{id}/change/paid',                  ['as' => 'order.change.paid',       'uses' => 'OrderController@postChangePaid']);

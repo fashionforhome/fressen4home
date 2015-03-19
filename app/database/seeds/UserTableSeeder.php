@@ -33,6 +33,11 @@ class UserTableSeeder extends DatabaseSeeder
 			'email'     => 'tester@fashionforhome.de',
 		    'password'  => Hash::make('tester')
 	    ]);
+
+	    User::create([
+			'email'     => 'tester2@fashionforhome.de',
+		    'password'  => Hash::make('tester')
+	    ]);
     }
 
     private function createNewUser()

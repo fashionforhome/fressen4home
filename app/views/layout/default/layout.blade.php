@@ -15,11 +15,29 @@
 	<link href="{{ asset('assets/libs/twitterbootstrap3/css/bootstrap.min.css') }}" rel="stylesheet">
 	<script src="{{ asset('assets/libs/twitterbootstrap3/js/bootstrap.min.js') }}"></script>
 
+    @if (Auth::check() && Config::get('pusher.enabled'))
+        <script type="text/javascript">
+            var PusherData = {
+                user: "{{ Auth::user()->email }}",
+                app_key: "{{ Config::get('pusher.app_key') }}",
+                channel: "{{ Config::get('pusher.channel') }}",
+                close_in: {{ Config::get('pusher.close_in') }},
+                notifications: {
+                   created: {{ Auth::user()->notify_created }},
+                   incoming: {{ Auth::user()->notify_incoming }}
+                },
+                deliveries: [{{ implode(",", Auth::user()->deliveries_today) }}]
+            };
+        </script>
+        <script src="//js.pusher.com/2.2/pusher.min.js" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/notifications.js') }}"></script>
+    @endif
+
 	<!-- css -->
 	<link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
 	@yield('header')
-	
+
 </head>
 
 <body>

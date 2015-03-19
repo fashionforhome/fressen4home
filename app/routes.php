@@ -34,9 +34,15 @@ Route::group(['before' => 'auth'], function() {
 	Route::post('/delivery/{deliveryId}/delete',			['as' => 'delivery.delete',     	'uses' => 'DeliveryController@postDelete']);
 	Route::post('/delivery/{deliveryId}/close',			    ['as' => 'delivery.close',     	    'uses' => 'DeliveryController@postClose']);
 
+	Route::get('/delivery/{deliveryId}/incoming',		    ['as' => 'delivery.incoming',     	'uses' => 'DeliveryController@getIncoming']);
+
 	// orders
 	Route::post('/order/{id}/change/paid',                  ['as' => 'order.change.paid',       'uses' => 'OrderController@postChangePaid']);
 	Route::post('/order/{orderId}/delete',                  ['as' => 'order.delete',            'uses' => 'OrderController@postDelete']);
+
+    // configs
+	Route::get('/configs',                                  ['as' => 'configs.all',             'uses' => 'ConfigsController@getAll']);
+	Route::post('/configs',                                 ['as' => 'configs.save',            'uses' => 'ConfigsController@postSave']);
 
 });
 

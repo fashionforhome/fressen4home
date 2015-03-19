@@ -5,6 +5,13 @@
 		<div class="panel panel-default">
 
 			<div class="panel-heading">
+
+                @if ($delivery->user == Auth::user())
+                    <div class="pull-right">
+                        <a href="{{ route('delivery.incoming', [$delivery->getKey()])}}" class="btn btn-success btn-lg">Delivery Incoming</a>
+                    </div>
+                @endif
+
 				<h3 class="panel-title">
 					{{ $delivery->store->name }}
 				</h3>

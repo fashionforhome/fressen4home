@@ -40,6 +40,7 @@
                             <li><a href="{{ URL::route('user.deliveries') }}">My Deliveries</a></li>
                             <li><a href="{{ URL::route('user.orders') }}">My Orders</a></li>
                             <li><a href="{{ URL::route('user.statistics') }}">Statistics</a></li>
+                            <li><a href="{{ URL::route('configs.all') }}">Configurations</a></li>
                         </ul>
                     </li>
 					@foreach ($navigation['right'] as $routeName => $routeData)

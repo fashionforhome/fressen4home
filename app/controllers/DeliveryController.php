@@ -57,14 +57,43 @@ class DeliveryController extends BaseController {
 		$storeId = Input::get('store');
 		$closingTime = Input::get('closing_time');
 
+        $store = Store::find($storeId);
+
 		$delivery = new Delivery();
 		$delivery->user()->associate(Auth::user());
-		$delivery->store()->associate(Store::find($storeId));
+		$delivery->store()->associate($store);
 		$delivery->closing_time = $closingTime;
 		$delivery->save();
 
-		return Redirect::route('delivery.active');
+        // push notification
+        F4H\Pusher::push('delivery.created', array(
+            'user' => Auth::user()->email,
+            'store' => $store->name,
+            'closing_time' => $closingTime,
+            'delivery' => $delivery->getKey()
+        ));
+
+        return Redirect::route('delivery.active');
 	}
+
+    /**
+     * notify subscribers about incoming delivery
+     *
+     * @param $deliveryId
+     */
+    public function getIncoming($deliveryId)
+    {
+        $delivery = Delivery::find($deliveryId);
+        if($delivery && $delivery->user == Auth::user()) {
+            F4H\Pusher::push('delivery.incoming', array(
+                'user' => Auth::user()->email,
+                'store' => $delivery->store->name,
+                'delivery' => $delivery->getKey()
+            ));
+        }
+
+        return Redirect::back();
+    }
 
 	/**
 	 * add a dish order to a delivery

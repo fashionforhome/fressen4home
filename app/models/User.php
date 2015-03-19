@@ -101,4 +101,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
 		return $totalPrice;
 	}
+
+    /**
+     * @return string
+     */
+    public function getDeliveriesTodayAttribute()
+    {
+        $deliveries = array();
+        $orders = $this->orders()->where('created_at', '>=', Carbon\Carbon::today())->get();
+        foreach ($orders as $order) {
+            $deliveries[] = $order->delivery->getKey();
+        }
+
+        return array_unique($deliveries);
+    }
+
 }

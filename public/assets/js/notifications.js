@@ -39,6 +39,8 @@ $(function() {
         if (PusherData.notifications.created) {
             channel.bind('delivery.created', function(data) {
                 data = JSON.parse(data.message);
+                data.delivery = parseInt(data.delivery);
+                
                 var date = new Date(),
                     currentTime = date.getHours() + ':' + date.getMinutes();
 
@@ -54,6 +56,8 @@ $(function() {
         if (PusherData.notifications.incoming) {
             channel.bind('delivery.incoming', function(data) {
                 data = JSON.parse(data.message);
+                data.delivery = parseInt(data.delivery);
+                
                 var date = new Date(),
                     currentTime = date.getHours() + ':' + date.getMinutes();
 

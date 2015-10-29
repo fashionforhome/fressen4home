@@ -1,3 +1,10 @@
+/**
+ * @author Eduard Bess <eduard.bess@fashion4home.de>
+ *
+ * @copyright (c) 2014 by fashion4home GmbH <www.fashionforhome.de>
+ * @license GPL-3.0
+ * @license http://opensource.org/licenses/GPL-3.0 GNU GENERAL PUBLIC LICENSE
+ */
 $(function() {
     function notify(text, options) {
         // Let's check if the browser supports notifications

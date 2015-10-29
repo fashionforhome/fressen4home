@@ -1,8 +1,8 @@
 {
-	"name": "fashion4home/fressen4home",
+	"name": "fashionforhome/fressen4home",
 	"description": "Fressen4Home",
 	"keywords": ["fashion4home", "fashion for home", "fressen4home", "fressen 4 home"],
-	"license": "MIT",
+	"license": "GPL-3.0",
 	"require": {
 		"laravel/framework": "4.2.*",
 		"pusher/pusher-php-server": "~2.2"

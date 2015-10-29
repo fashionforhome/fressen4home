@@ -1,4 +1,21 @@
 <?php
+/**
+ * This is the ..... [Description]
+ *
+ * @category App
+ * @package Controller
+ *
+ * @author Claudia Hüttenrauch <claudia.huettenrauch@fashion4home.de>
+ *
+ * @copyright (c) 2014 by fashion4home GmbH <www.fashionforhome.de>
+ * @license GPL-3.0
+ * @license http://opensource.org/licenses/GPL-3.0 GNU GENERAL PUBLIC LICENSE
+ *
+ * @version 1.0.0
+ *
+ * Date: 12.06.2014
+ * Time: 22:04
+ */
 
 use Carbon\Carbon;
 use \Illuminate\Support\MessageBag;
